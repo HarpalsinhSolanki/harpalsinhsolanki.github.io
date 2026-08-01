@@ -1,9 +1,24 @@
-import React, { useState } from 'react';
-import { projects, featuredProjects, otherProjects } from '../data/projectsData';
+import React, { useEffect, useRef, useState } from 'react';
+import { featuredProjects, otherProjects } from '../data/projectsData';
 import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 
 const ProjectCard: React.FC<{ project: any, featured?: boolean }> = ({ project, featured }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isTruncated, setIsTruncated] = useState(false);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (isExpanded) return;
+    const checkTruncation = () => {
+      const el = descriptionRef.current;
+      if (el) {
+        setIsTruncated(el.scrollHeight > el.clientHeight + 1);
+      }
+    };
+    checkTruncation();
+    window.addEventListener('resize', checkTruncation);
+    return () => window.removeEventListener('resize', checkTruncation);
+  }, [project.description, isExpanded]);
 
   return (
     <div className={`card ${featured ? 'border-l-4 border-l-accent' : ''}`}>
@@ -22,11 +37,11 @@ const ProjectCard: React.FC<{ project: any, featured?: boolean }> = ({ project, 
         )}
       </div>
 
-      <p className={`text-text text-sm mb-2 ${!isExpanded && project.description.length > 150 ? 'line-clamp-2' : ''}`}>
+      <p ref={descriptionRef} className={`text-text text-sm mb-2 ${!isExpanded ? 'line-clamp-2' : ''}`}>
         {project.description}
       </p>
 
-      {project.description.length > 150 && (
+      {isTruncated && (
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="text-accent-dark hover:text-primary text-xs font-medium flex items-center mb-2"

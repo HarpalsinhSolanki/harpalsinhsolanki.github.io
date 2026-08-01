@@ -23,7 +23,13 @@ export const skills: Skill[] = [
   { name: "MVVM", experienceYears: 3, level: 4, category: "other" },
   { name: "React Native", experienceYears: 2, level: 4, category: "framework" },
   { name: "JSON", experienceYears: 8, level: 4, category: "other" },
-  { name: "TypeScript", experienceYears: 2, level: 4, category: "programming" }
+  { name: "TypeScript", experienceYears: 2, level: 4, category: "programming" },
+  { name: "JavaScript", experienceYears: 2, level: 3, category: "programming" },
+  { name: "Fabric.js", experienceYears: 2, level: 3, category: "framework" },
+  { name: "Three.js", experienceYears: 2, level: 3, category: "framework" },
+  { name: "PHP", experienceYears: 1, level: 3, category: "programming" },
+  { name: "Symfony", experienceYears: 1, level: 3, category: "framework" },
+  { name: "Claude AI", experienceYears: 1, level: 4, category: "tool" }
 ];
 
 export const skillsByCategory = {

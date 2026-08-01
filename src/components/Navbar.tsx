@@ -8,7 +8,7 @@ const navLinks = [
   { name: 'Skills', href: '#skills' },
   { name: 'Education', href: '#education' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Certifications', href: '#certifications' },
+  // { name: 'Certifications', href: '#certifications' }, // hidden for now
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           <a href="#home" className="flex items-center space-x-2">
             <Code2 size={22} className="text-accent" />
-            <span className="font-bold text-lg text-primary">hs.dev</span>
+            <span className={`font-bold text-lg ${scrolled ? 'text-primary' : 'text-white'}`}>hs.dev</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -68,8 +68,10 @@ const Navbar: React.FC = () => {
                 href={link.href}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   activeSection === link.href.slice(1)
-                    ? 'text-accent-dark'
-                    : 'text-primary hover:text-accent-dark'
+                    ? 'text-accent'
+                    : scrolled
+                      ? 'text-primary hover:text-accent-dark'
+                      : 'text-slate-200 hover:text-accent'
                 }`}
               >
                 {link.name}
@@ -81,7 +83,7 @@ const Navbar: React.FC = () => {
           <div className="md:hidden flex items-center space-x-4">
             <button
               onClick={toggleMenu}
-              className="text-primary"
+              className={scrolled ? 'text-primary' : 'text-white'}
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

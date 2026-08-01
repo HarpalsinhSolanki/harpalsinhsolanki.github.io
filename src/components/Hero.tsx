@@ -24,7 +24,7 @@ const Hero: React.FC = () => {
             </div>
 
             <p className="text-slate-300 max-w-xl leading-relaxed">
-              10+ years of experience in Android and cross-platform apps development with
+              11.5+ years of experience in Android and cross-platform apps development with
               expertise in Java, Kotlin, and React Native.
             </p>
 
