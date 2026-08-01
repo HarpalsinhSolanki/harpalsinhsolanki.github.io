@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-gray-200 text-black font-serif;
+    background: #c0c0c0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-black;
+  }
+
+  h1 {
+    @apply text-3xl sm:text-4xl lg:text-5xl;
+  }
+
+  h2 {
+    @apply text-2xl sm:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl sm:text-2xl;
+  }
+
+  h4 {
+    @apply text-lg sm:text-xl;
+  }
+
+  section {
+    @apply py-4;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-3 py-1 font-medium border-2 border-gray-800 text-sm;
+    background: #e0e0e0;
+    border-style: outset;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    @apply bg-blue-100 text-black border-gray-600;
+  }
+
+  .btn-outline {
+    @apply border-2 border-gray-800 text-black bg-white;
+  }
+
+  .section-title {
+    @apply text-xl font-bold mb-3 text-black underline;
+  }
+
+  .card {
+    @apply bg-gray-100 p-3 mb-3;
+    border: 2px inset #c0c0c0;
+  }
+
+  .skill-bar {
+    @apply h-3 bg-gray-300 border border-gray-600;
+  }
+  
+  .skill-progress {
+    @apply h-full bg-blue-500;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
