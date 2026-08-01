@@ -33,8 +33,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Times New Roman', 'serif'],
-        serif: ['Times New Roman', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['Fira Code', 'monospace'],
       },
       animation: {

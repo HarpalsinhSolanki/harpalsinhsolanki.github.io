@@ -6,14 +6,14 @@ const SkillProgress: React.FC<{ name: string, level: number, years: number }> = 
   const percentage = (level / 5) * 100;
   
   return (
-    <div className="mb-2">
-      <div className="flex justify-between items-center mb-1">
-        <span className="font-medium text-black text-sm">{name}</span>
-        <span className="text-xs text-gray-600">{years}y</span>
+    <div className="mb-3">
+      <div className="flex justify-between items-center mb-1.5">
+        <span className="font-medium text-primary text-sm">{name}</span>
+        <span className="text-xs text-secondary">{years}y</span>
       </div>
       <div className="skill-bar">
-        <div 
-          className="skill-progress" 
+        <div
+          className="skill-progress"
           style={{ width: `${percentage}%` }}
         ></div>
       </div>
@@ -43,22 +43,22 @@ const Skills: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("programming");
   
   return (
-    <section id="skills" className="py-6">
-      <h2 className="section-title mb-4">Skills & Expertise</h2>
-      
-      <div className="mb-4">
-        <div className="bg-white p-2 flex flex-wrap gap-1">
+    <section id="skills">
+      <h2 className="section-title mb-6">Skills & Expertise</h2>
+
+      <div className="mb-5">
+        <div className="flex flex-wrap gap-2">
           {(Object.keys(skillsByCategory) as Category[]).map((category) => (
             <button
               key={category}
-              className={`px-2 py-1 font-medium text-xs flex items-center
-                ${activeCategory === category 
-                  ? 'bg-blue-600 text-white' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-blue-100'
+              className={`px-3 py-2 rounded-full font-medium text-xs flex items-center transition-colors
+                ${activeCategory === category
+                  ? 'bg-primary text-white'
+                  : 'bg-white text-secondary border border-slate-200 hover:border-accent hover:text-accent-dark'
                 }`}
               onClick={() => setActiveCategory(category)}
             >
-              <span className="mr-1">
+              <span className="mr-1.5 [&>svg]:w-4 [&>svg]:h-4">
                 {categoryIcons[category]}
               </span>
               <span className="hidden sm:inline">{categoryTitles[category]}</span>
@@ -66,16 +66,16 @@ const Skills: React.FC = () => {
           ))}
         </div>
       </div>
-      
+
       <div className="card">
-        <h3 className="text-lg font-semibold mb-3 text-black flex items-center">
-          <span className="mr-1">
+        <h3 className="text-lg font-semibold mb-4 text-primary flex items-center">
+          <span className="mr-2 [&>svg]:w-5 [&>svg]:h-5">
             {categoryIcons[activeCategory]}
           </span>
           {categoryTitles[activeCategory]}
         </h3>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1">
           {skillsByCategory[activeCategory].map((skill, index) => (
             <SkillProgress 
               key={index}

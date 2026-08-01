@@ -6,15 +6,15 @@ const ProjectCard: React.FC<{ project: any, featured?: boolean }> = ({ project, 
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className={`card ${featured ? 'border-l-4 border-l-blue-600' : ''}`}>
+    <div className={`card ${featured ? 'border-l-4 border-l-accent' : ''}`}>
       <div className="flex justify-between items-start mb-2">
-        <h3 className="text-lg font-semibold text-black">{project.name}</h3>
+        <h3 className="text-lg font-semibold text-primary">{project.name}</h3>
         {project.playStoreUrl && (
           <a
             href={project.playStoreUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700"
+            className="text-accent-dark hover:text-primary transition-colors"
             aria-label="View on Play Store"
           >
             <ExternalLink size={16} />
@@ -22,14 +22,14 @@ const ProjectCard: React.FC<{ project: any, featured?: boolean }> = ({ project, 
         )}
       </div>
 
-      <p className={`text-gray-700 text-sm mb-2 ${!isExpanded && project.description.length > 150 ? 'line-clamp-2' : ''}`}>
+      <p className={`text-text text-sm mb-2 ${!isExpanded && project.description.length > 150 ? 'line-clamp-2' : ''}`}>
         {project.description}
       </p>
 
       {project.description.length > 150 && (
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="text-blue-600 hover:text-blue-700 text-xs font-medium flex items-center mb-2"
+          className="text-accent-dark hover:text-primary text-xs font-medium flex items-center mb-2"
         >
           {isExpanded ? (
             <>Show Less <ChevronUp size={14} className="ml-1" /></>
@@ -40,11 +40,11 @@ const ProjectCard: React.FC<{ project: any, featured?: boolean }> = ({ project, 
       )}
 
       {project.technologies && (
-        <div className="flex flex-wrap gap-1">
+        <div className="flex flex-wrap gap-1.5">
           {project.technologies.map((tech: string, index: number) => (
             <span
               key={index}
-              className="px-2 py-1 bg-gray-300 text-black text-xs border border-gray-500"
+              className="px-2.5 py-1 rounded-full bg-secondary-light/10 text-secondary text-xs font-medium"
             >
               {tech}
             </span>
@@ -59,12 +59,12 @@ const Projects: React.FC = () => {
   const [showAll, setShowAll] = useState(false);
 
   return (
-    <section id="projects" className="py-6">
-      <h2 className="section-title mb-4">Projects</h2>
+    <section id="projects">
+      <h2 className="section-title mb-6">Projects</h2>
 
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold text-black mb-2">Featured Projects</h3>
-        <div className="space-y-3">
+      <div className="mb-6">
+        <h3 className="text-lg font-semibold text-primary mb-3">Featured Projects</h3>
+        <div className="space-y-4">
           {featuredProjects.map((project, index) => (
             <ProjectCard key={index} project={project} featured={true} />
           ))}
@@ -73,8 +73,8 @@ const Projects: React.FC = () => {
 
       {otherProjects.length > 0 && (
         <div>
-          <div className="flex justify-between items-center mb-2">
-            <h3 className="text-lg font-semibold text-black">Other Projects</h3>
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-lg font-semibold text-primary">Other Projects</h3>
             <button
               onClick={() => setShowAll(!showAll)}
               className="btn btn-outline text-xs flex items-center"

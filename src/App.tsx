@@ -6,19 +6,23 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Education from './components/Education';
 import Projects from './components/Projects';
+import Certifications from './components/Certifications';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="bg-gray-200 text-black">
+    <div className="bg-background text-text">
       <Navbar />
+      <Hero />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Hero />
         <About />
         <Experience />
         <Skills />
         <Education />
         <Projects />
+        <Certifications />
+        <Contact />
       </main>
       <Footer />
     </div>

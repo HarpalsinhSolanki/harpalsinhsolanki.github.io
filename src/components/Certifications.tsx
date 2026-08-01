@@ -4,18 +4,18 @@ import { certifications } from '../data/certificationsData';
 
 const Certifications: React.FC = () => {
   return (
-    <section id="certifications" className="py-20">
-      <h2 className="section-title mb-12 text-center">Training & Certifications</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <section id="certifications">
+      <h2 className="section-title mb-6">Training & Certifications</h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {certifications.map((cert, index) => (
-          <div 
+          <div
             key={index}
-            className="card hover:shadow-lg transform hover:-translate-y-1 transition-all border-l-4 border-l-accent"
+            className="card hover:-translate-y-0.5 transition-all border-l-4 border-l-accent"
           >
             <div className="flex items-start">
-              <div className="p-3 bg-primary-light rounded-full mr-4">
-                <Award size={24} className="text-accent" />
+              <div className="p-3 bg-primary/5 rounded-full mr-4">
+                <Award size={24} className="text-accent-dark" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-primary mb-2">
