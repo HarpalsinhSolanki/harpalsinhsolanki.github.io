@@ -21,3 +21,4 @@ This is a single-page personal portfolio/resume site built with Vite + React 18 
 - Icons come from `lucide-react`.
 - Tailwind theme customization (colors, fonts, animations) lives in `tailwind.config.js`. Note the `fontFamily.sans`/`serif` are overridden to `Times New Roman`.
 - `tsconfig.json` is a solution file referencing `tsconfig.app.json` (app source, strict mode with `noUnusedLocals`/`noUnusedParameters`) and `tsconfig.node.json` (build tooling config, e.g. `vite.config.ts`).
+
