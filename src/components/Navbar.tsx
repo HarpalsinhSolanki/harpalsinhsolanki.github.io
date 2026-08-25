@@ -48,64 +48,64 @@ const Navbar: React.FC = () => {
   }, [scrolled]);
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <a href="#home" className="flex items-center space-x-2">
-            <Code2 size={22} className="text-accent" />
-            <span className={`font-bold text-lg ${scrolled ? 'text-primary' : 'text-white'}`}>hs.dev</span>
-          </a>
+    <nav className="fixed top-0 inset-x-0 z-50 flex justify-center px-4">
+      <div
+        className={`w-full max-w-5xl mt-0 sm:mt-4 sm:rounded-full transition-all duration-300 ${
+          scrolled ? 'bg-white/[0.06] backdrop-blur-xl border border-white/10 shadow-glow' : 'bg-white/[0.02] backdrop-blur-md border border-white/5'
+        }`}
+      >
+        <div className="px-4 sm:px-6">
+          <div className="flex justify-between items-center h-16">
+            <a href="#home" className="flex items-center space-x-2">
+              <Code2 size={22} className="text-primary" />
+              <span className="font-display font-bold text-lg text-white">hs.dev</span>
+            </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  activeSection === link.href.slice(1)
-                    ? 'text-accent'
-                    : scrolled
-                      ? 'text-primary hover:text-accent-dark'
-                      : 'text-slate-200 hover:text-accent'
-                }`}
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className={`px-3 py-2 rounded-full text-sm font-medium transition-colors ${
+                    activeSection === link.href.slice(1)
+                      ? 'text-primary'
+                      : 'text-slate-300 hover:text-primary'
+                  }`}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+
+            {/* Mobile Navigation */}
+            <div className="md:hidden flex items-center space-x-4">
+              <button
+                onClick={toggleMenu}
+                className="text-white"
+                aria-label="Toggle menu"
               >
-                {link.name}
-              </a>
-            ))}
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
 
-          {/* Mobile Navigation */}
-          <div className="md:hidden flex items-center space-x-4">
-            <button
-              onClick={toggleMenu}
-              className={scrolled ? 'text-primary' : 'text-white'}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden pb-4 bg-[#05070d]/95 backdrop-blur-xl rounded-2xl mb-4 border border-white/10">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="block py-2 px-4 font-medium text-slate-200 hover:text-primary"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden pb-4 bg-white/95 backdrop-blur-md rounded-lg shadow-sm">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="block py-2 px-4 font-medium text-primary hover:text-accent-dark"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        )}
       </div>
     </nav>
   );

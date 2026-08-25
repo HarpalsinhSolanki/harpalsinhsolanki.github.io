@@ -11,12 +11,12 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-primary text-slate-300 py-10 mt-12">
+    <footer className="relative border-t border-white/10 bg-white/[0.02] backdrop-blur-xl text-slate-300 py-10 mt-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center gap-4">
           <div className="flex items-center">
-            <Code2 size={20} className="text-accent mr-2" />
-            <span className="font-bold text-lg text-white">hs.dev</span>
+            <Code2 size={20} className="text-primary mr-2" />
+            <span className="font-display font-bold text-lg text-white">hs.dev</span>
           </div>
 
           <div className="flex items-center gap-5">
@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-accent transition-colors"
+              className="hover:text-primary transition-colors"
               aria-label="GitHub"
             >
               <Github size={18} />
@@ -33,21 +33,21 @@ const Footer: React.FC = () => {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-accent transition-colors"
+              className="hover:text-primary transition-colors"
               aria-label="LinkedIn"
             >
               <Linkedin size={18} />
             </a>
             <button
               onClick={scrollToTop}
-              className="hover:text-accent transition-colors"
+              className="hover:text-primary transition-colors"
               aria-label="Back to top"
             >
               <ArrowUp size={18} />
             </button>
           </div>
 
-          <p className="text-slate-400 text-sm">
+          <p className="text-slate-500 text-sm">
             © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
           </p>
         </div>
