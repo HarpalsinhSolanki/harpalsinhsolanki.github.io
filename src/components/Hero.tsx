@@ -1,12 +1,14 @@
 import React from 'react';
-import { Mail, Github, Linkedin, ArrowDown } from 'lucide-react';
+import { Mail, Github, Linkedin, ArrowDown, Download } from 'lucide-react';
 import { personalInfo, getYearsOfExperience, getHeroTagline } from '../data/personalInfo';
+import { projects } from '../data/projectsData';
 
 const Hero: React.FC = () => {
   const years = getYearsOfExperience();
 
   const facts = [
     { label: 'Experience', value: `${years}+ yrs` },
+    { label: 'Projects', value: `${projects.length}+` },
     { label: 'Focus', value: 'Frontend JS · Backend SQL' },
     { label: 'Based in', value: 'Anand, Gujarat, India' },
   ];
@@ -27,7 +29,7 @@ const Hero: React.FC = () => {
           {getHeroTagline(years)}
         </p>
 
-        <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mb-10 border-y border-line py-6">
+        <dl className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl mb-10 border-y border-line py-6">
           {facts.map((fact) => (
             <div key={fact.label}>
               <dt className="meta-label mb-1">{fact.label}</dt>
@@ -37,7 +39,11 @@ const Hero: React.FC = () => {
         </dl>
 
         <div className="flex flex-wrap items-center gap-6">
-          <a href={`mailto:${personalInfo.email}`} className="btn-primary">
+          <a href="/resume.pdf" download className="btn-primary">
+            <Download size={14} />
+            Download Resume
+          </a>
+          <a href={`mailto:${personalInfo.email}`} className="btn-outline">
             <Mail size={14} />
             Get in touch
           </a>

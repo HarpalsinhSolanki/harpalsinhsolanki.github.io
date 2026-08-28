@@ -81,7 +81,7 @@ const Projects: React.FC = () => {
 
         <div className="mb-6">
           <h3 className="meta-label mb-3">Featured Projects</h3>
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
             {featuredProjects.map((project, index) => (
               <ProjectCard key={index} project={project} featured={true} />
             ))}
@@ -105,7 +105,7 @@ const Projects: React.FC = () => {
             </div>
 
             {showAll && (
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
                 {otherProjects.map((project, index) => (
                   <ProjectCard key={index} project={project} />
                 ))}

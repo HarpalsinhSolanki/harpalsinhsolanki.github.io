@@ -1,35 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { skillsByCategory } from '../data/skillsData';
 import { Monitor, Cpu, Layers, Database, Settings } from 'lucide-react';
 import Reveal from './Reveal';
 
-const SkillProgress: React.FC<{ name: string, level: number, years: number }> = ({ name, level, years }) => {
-  const percentage = (level / 5) * 100;
-
-  return (
-    <div className="mb-3">
-      <div className="flex justify-between items-center mb-1.5">
-        <span className="font-medium text-ink text-sm">{name}</span>
-        <span className="text-xs text-ink-faint font-mono">{years}y</span>
-      </div>
-      <div className="skill-bar">
-        <div
-          className="skill-progress"
-          style={{ width: `${percentage}%` }}
-        ></div>
-      </div>
-    </div>
-  );
-};
-
 type Category = "programming" | "framework" | "tool" | "database" | "other";
 
 const categoryIcons = {
-  programming: <Cpu size={16} />,
-  framework: <Layers size={16} />,
-  tool: <Settings size={16} />,
-  database: <Database size={16} />,
-  other: <Monitor size={16} />
+  programming: <Cpu size={15} />,
+  framework: <Layers size={15} />,
+  tool: <Settings size={15} />,
+  database: <Database size={15} />,
+  other: <Monitor size={15} />
 };
 
 const categoryTitles = {
@@ -41,48 +22,33 @@ const categoryTitles = {
 };
 
 const Skills: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<Category>("programming");
+  const categories = Object.keys(skillsByCategory) as Category[];
 
   return (
     <section id="skills">
       <Reveal>
         <h2 className="section-title"><span className="section-number">03</span>Skills &amp; Expertise</h2>
 
-        <div className="mb-5">
-          <div className="flex flex-wrap gap-2">
-            {(Object.keys(skillsByCategory) as Category[]).map((category) => (
-              <button
-                key={category}
-                className={`px-3 py-2 font-mono text-xs uppercase tracking-wider flex items-center gap-1.5 border transition-colors
-                  ${activeCategory === category
-                    ? 'bg-ink text-paper border-ink'
-                    : 'bg-transparent text-ink-soft border-line hover:border-ink/40 hover:text-ink'
-                  }`}
-                onClick={() => setActiveCategory(category)}
-              >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {categories.map((category) => (
+            <div key={category} className="card">
+              <div className="flex items-center gap-2 mb-3 text-ink-faint">
                 {categoryIcons[category]}
-                <span className="hidden sm:inline">{categoryTitles[category]}</span>
-              </button>
-            ))}
-          </div>
-        </div>
+                <h3 className="meta-label">{categoryTitles[category]}</h3>
+              </div>
 
-        <div className="card">
-          <h3 className="text-lg mb-4 text-ink flex items-center gap-2">
-            {categoryIcons[activeCategory]}
-            {categoryTitles[activeCategory]}
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1">
-            {skillsByCategory[activeCategory].map((skill, index) => (
-              <SkillProgress
-                key={index}
-                name={skill.name}
-                level={skill.level}
-                years={skill.experienceYears}
-              />
-            ))}
-          </div>
+              <div className="flex flex-wrap gap-2">
+                {skillsByCategory[category].map((skill, i) => (
+                  <span
+                    key={i}
+                    className="px-3 py-1.5 border border-line text-sm text-ink-soft hover:border-accent/40 hover:text-ink transition-colors"
+                  >
+                    {skill.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </Reveal>
     </section>

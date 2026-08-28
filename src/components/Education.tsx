@@ -9,7 +9,7 @@ const Education: React.FC = () => {
       <Reveal>
         <h2 className="section-title"><span className="section-number">04</span>Education</h2>
 
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
           {education.map((edu, index) => (
             <div
               key={index}
