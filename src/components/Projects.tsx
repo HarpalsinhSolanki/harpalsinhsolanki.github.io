@@ -22,30 +22,30 @@ const ProjectCard: React.FC<{ project: any, featured?: boolean }> = ({ project, 
   }, [project.description, isExpanded]);
 
   return (
-    <div className={`card ${featured ? 'border-l-2 border-l-secondary' : ''}`}>
+    <div className={`card ${featured ? 'border-l-2 border-l-accent/60' : ''}`}>
       <div className="flex justify-between items-start mb-2">
-        <h3 className="text-lg font-semibold text-primary">{project.name}</h3>
+        <h3 className="text-lg text-ink">{project.name}</h3>
         {project.playStoreUrl && (
           <a
             href={project.playStoreUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-secondary hover:text-primary transition-colors"
+            className="text-ink-faint hover:text-accent transition-colors"
             aria-label="View on Play Store"
           >
-            <ExternalLink size={16} />
+            <ExternalLink size={15} />
           </a>
         )}
       </div>
 
-      <p ref={descriptionRef} className={`text-text text-sm mb-2 ${!isExpanded ? 'line-clamp-2' : ''}`}>
+      <p ref={descriptionRef} className={`text-ink-soft text-sm mb-2 ${!isExpanded ? 'line-clamp-2' : ''}`}>
         {project.description}
       </p>
 
       {isTruncated && (
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="text-secondary hover:text-primary text-xs font-medium flex items-center mb-2"
+          className="text-accent hover:text-accent-dark text-xs font-mono uppercase tracking-wide flex items-center mb-2"
         >
           {isExpanded ? (
             <>Show Less <ChevronUp size={14} className="ml-1" /></>
@@ -56,11 +56,11 @@ const ProjectCard: React.FC<{ project: any, featured?: boolean }> = ({ project, 
       )}
 
       {project.technologies && (
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1.5 mt-2">
           {project.technologies.map((tech: string, index: number) => (
             <span
               key={index}
-              className="px-2.5 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-medium border border-secondary/20"
+              className="px-2 py-0.5 bg-transparent text-ink-soft text-xs font-mono border border-line"
             >
               {tech}
             </span>
@@ -77,10 +77,10 @@ const Projects: React.FC = () => {
   return (
     <section id="projects">
       <Reveal>
-        <h2 className="section-title mb-6">Projects</h2>
+        <h2 className="section-title"><span className="section-number">05</span>Projects</h2>
 
         <div className="mb-6">
-          <h3 className="text-lg font-semibold text-primary mb-3">Featured Projects</h3>
+          <h3 className="meta-label mb-3">Featured Projects</h3>
           <div className="space-y-4">
             {featuredProjects.map((project, index) => (
               <ProjectCard key={index} project={project} featured={true} />
@@ -91,10 +91,10 @@ const Projects: React.FC = () => {
         {otherProjects.length > 0 && (
           <div>
             <div className="flex justify-between items-center mb-3">
-              <h3 className="text-lg font-semibold text-primary">Other Projects</h3>
+              <h3 className="meta-label">Other Projects</h3>
               <button
                 onClick={() => setShowAll(!showAll)}
-                className="btn btn-outline text-xs flex items-center"
+                className="btn-outline text-xs flex items-center"
               >
                 {showAll ? (
                   <>Show Less <ChevronUp size={14} className="ml-1" /></>

@@ -1,80 +1,69 @@
 import React from 'react';
 import { Mail, Github, Linkedin, ArrowDown } from 'lucide-react';
-import { personalInfo } from '../data/personalInfo';
+import { personalInfo, getYearsOfExperience, getHeroTagline } from '../data/personalInfo';
 
 const Hero: React.FC = () => {
-  const initials = personalInfo.name
-    .split(' ')
-    .map((part) => part[0])
-    .join('');
+  const years = getYearsOfExperience();
+
+  const facts = [
+    { label: 'Experience', value: `${years}+ yrs` },
+    { label: 'Focus', value: 'Frontend JS · Backend SQL' },
+    { label: 'Based in', value: 'Anand, Gujarat, India' },
+  ];
 
   return (
-    <section id="home" className="relative py-0 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
-          <div className="lg:col-span-2 space-y-5 animate-fade-in">
-            <p className="text-primary font-mono text-sm tracking-wide">&gt; Hi, my name is</p>
-            <div className="space-y-1">
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-primary-light to-secondary-light bg-clip-text text-transparent">
-                {personalInfo.name}
-              </h1>
-              <h2 className="text-2xl sm:text-3xl text-slate-300 font-display font-bold">
-                {personalInfo.title}
-              </h2>
-            </div>
+    <section id="home" className="border-b-0 !py-0">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 sm:pt-40 sm:pb-20">
+        <p className="meta-label mb-4">Portfolio — {new Date().getFullYear()}</p>
 
-            <p className="text-slate-400 max-w-xl leading-relaxed">
-              11.5+ years of experience in Android and cross-platform apps development with
-              expertise in Java, Kotlin, and React Native.
-            </p>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-3 max-w-3xl">
+          {personalInfo.name}
+        </h1>
+        <p className="font-mono text-sm text-accent tracking-wide mb-8">
+          {personalInfo.title} — Mobile &amp; Cross-Platform
+        </p>
 
-            <div className="flex flex-wrap gap-3 pt-2">
-              <a href="#contact" className="btn-primary">
-                <Mail size={16} />
-                Contact Me
-              </a>
-              <a href="#projects" className="btn-outline">
-                View Projects
-              </a>
-            </div>
+        <p className="text-ink-soft max-w-2xl leading-relaxed mb-10">
+          {getHeroTagline(years)}
+        </p>
 
-            <div className="flex items-center gap-4 pt-4">
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-primary transition-colors"
-                aria-label="GitHub"
-              >
-                <Github size={20} />
-              </a>
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-primary transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={20} />
-              </a>
+        <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mb-10 border-y border-line py-6">
+          {facts.map((fact) => (
+            <div key={fact.label}>
+              <dt className="meta-label mb-1">{fact.label}</dt>
+              <dd className="text-ink text-sm">{fact.value}</dd>
             </div>
-          </div>
+          ))}
+        </dl>
 
-          <div className="lg:col-span-1 flex justify-center lg:justify-end">
-            <div className="relative w-40 h-40 sm:w-48 sm:h-48">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-secondary blur-2xl opacity-40 animate-pulse-slow" />
-              <div className="relative w-full h-full rounded-full bg-[#0a0f1a] border border-white/10 ring-1 ring-primary/40 flex items-center justify-center">
-                <span className="text-4xl sm:text-5xl font-display font-bold bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
-                  {initials}
-                </span>
-              </div>
-            </div>
-          </div>
+        <div className="flex flex-wrap items-center gap-6">
+          <a href={`mailto:${personalInfo.email}`} className="btn-primary">
+            <Mail size={14} />
+            Get in touch
+          </a>
+          <a
+            href={personalInfo.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-accent transition-colors underline decoration-line hover:decoration-accent"
+          >
+            <Github size={15} />
+            GitHub
+          </a>
+          <a
+            href={personalInfo.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-accent transition-colors underline decoration-line hover:decoration-accent"
+          >
+            <Linkedin size={15} />
+            LinkedIn
+          </a>
         </div>
 
-        <div className="hidden sm:flex justify-center mt-12">
-          <a href="#about" className="text-slate-500 hover:text-primary transition-colors animate-pulse-slow" aria-label="Scroll to About">
-            <ArrowDown size={22} />
+        <div className="hidden sm:flex mt-16">
+          <a href="#about" className="text-ink-faint hover:text-accent transition-colors" aria-label="Scroll to About">
+            <ArrowDown size={18} />
           </a>
         </div>
       </div>

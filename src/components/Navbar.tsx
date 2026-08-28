@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Experience', href: '#experience' },
   { name: 'Skills', href: '#skills' },
@@ -28,7 +27,6 @@ const Navbar: React.FC = () => {
         setScrolled(isScrolled);
       }
 
-      // Update active section based on scroll position
       const sections = document.querySelectorAll('section[id]');
       sections.forEach(section => {
         const sectionTop = (section as HTMLElement).offsetTop - 100;
@@ -48,64 +46,61 @@ const Navbar: React.FC = () => {
   }, [scrolled]);
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-50 flex justify-center px-4">
-      <div
-        className={`w-full max-w-5xl mt-0 sm:mt-4 sm:rounded-full transition-all duration-300 ${
-          scrolled ? 'bg-white/[0.06] backdrop-blur-xl border border-white/10 shadow-glow' : 'bg-white/[0.02] backdrop-blur-md border border-white/5'
-        }`}
-      >
-        <div className="px-4 sm:px-6">
-          <div className="flex justify-between items-center h-16">
-            <a href="#home" className="flex items-center space-x-2">
-              <Code2 size={22} className="text-primary" />
-              <span className="font-display font-bold text-lg text-white">hs.dev</span>
-            </a>
+    <nav
+      className={`fixed top-0 inset-x-0 z-50 bg-paper/95 border-b transition-shadow duration-200 ${
+        scrolled ? 'border-line shadow-card' : 'border-transparent'
+      }`}
+    >
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <a href="#home" className="flex items-center gap-2 font-mono text-sm text-ink">
+            <span className="w-7 h-7 flex items-center justify-center border border-ink/30 text-xs font-semibold">HS</span>
+            <span className="hidden sm:inline text-ink-soft">Harpalsinh Solanki</span>
+          </a>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className={`px-3 py-2 rounded-full text-sm font-medium transition-colors ${
-                    activeSection === link.href.slice(1)
-                      ? 'text-primary'
-                      : 'text-slate-300 hover:text-primary'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-
-            {/* Mobile Navigation */}
-            <div className="md:hidden flex items-center space-x-4">
-              <button
-                onClick={toggleMenu}
-                className="text-white"
-                aria-label="Toggle menu"
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link, i) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`px-3 py-2 font-mono text-xs uppercase tracking-wider transition-colors ${
+                  activeSection === link.href.slice(1)
+                    ? 'text-accent'
+                    : 'text-ink-faint hover:text-ink'
+                }`}
               >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
+                <span className="text-ink-faint/70 mr-1">{String(i + 1).padStart(2, '0')}</span>
+                {link.name}
+              </a>
+            ))}
           </div>
 
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="md:hidden pb-4 bg-[#05070d]/95 backdrop-blur-xl rounded-2xl mb-4 border border-white/10">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="block py-2 px-4 font-medium text-slate-200 hover:text-primary"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-          )}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={toggleMenu}
+              className="text-ink"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
+
+        {isMenuOpen && (
+          <div className="md:hidden pb-4 border-t border-line">
+            {navLinks.map((link, i) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="flex items-center gap-3 py-3 px-1 font-mono text-sm text-ink-soft hover:text-accent border-b border-line last:border-b-0"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="text-ink-faint text-xs">{String(i + 1).padStart(2, '0')}</span>
+                {link.name}
+              </a>
+            ))}
+          </div>
+        )}
       </div>
     </nav>
   );
